@@ -289,7 +289,7 @@ qu1 = quantile (numUsuariosConec, .25)
 
 limInf2 = qu1 - ((3/2)*(qu3 - qu1))
 limSup2 = qu3 + ((3/2)*(qu3 - qu1))
-limInf;limSup
+limInf2;limSup2
 valores_atipicos <- numUsuariosConec[numUsuariosConec < limInf2 | numUsuariosConec > limSup2]
 valores_atipicos
 
@@ -344,3 +344,59 @@ de espera entre pulsos sucesivos a lo largo de una Fibra nerviosa")
 #Ejercicio 6
 #-------------
 
+# Creamos la tabla con pesos y consumos de combustible
+infoAutos <- data.frame(
+  Peso = c(1443, 1568, 1465, 1811, 1109, 1136, 1040),
+  ConsumoCombustible = c(43, 46, 44, 39, 59, 55, 59)
+)
+#Hacemos un resumen de cada variable
+summary (infoAutos$Peso)
+summary (infoAutos$ConsumoCombustible)
+
+#rango 
+rangoP <- max(infoAutos$Peso) - min(infoAutos$Peso)
+rangoP
+rangoC <- max(infoAutos$ConsumoCombustible) - min(infoAutos$ConsumoCombustible)
+rangoC
+
+#varianza
+var(infoAutos$Peso)
+var(infoAutos$ConsumoCombustible)
+
+#desvío muestral
+sdP <- sd(infoAutos$Peso);sdP
+sdC <- sd(infoAutos$ConsumoCombustible);sdC
+
+#coeficiente de variación
+cvarP <- (sdP/mean(infoAutos$Peso))*100
+cvarP
+cvarC <- (sdC/mean(infoAutos$ConsumoCombustible))*100
+cvarC
+
+#mediana de los desvios absolutos
+medP <- mad(infoAutos$Peso)
+medP
+medC <- mad(infoAutos$ConsumoCombustible)
+medC
+
+#Distancia intercuartílica con factor de corrección
+dinterP <- (quantile(infoAutos$Peso,.75)-quantile(infoAutos$Peso,.25))/1.349
+dinterP
+dinterC <- (quantile(infoAutos$ConsumoCombustible,.75)-quantile(infoAutos$ConsumoCombustible,.25))/1.349
+dinterC
+
+#cual variable tiene mayor variabilidad?
+if(cvarP < cvarC){
+  print("El consumo de combustible tiene mayor variabilidad")
+}else if (cvarP > cvarC){
+  print("El peso tiene mayor variabilidad")
+}else{
+  print("Las dos variables tienen la misma variabilidad")
+}
+
+#Diagramas de dispersion de ambas variables
+plot(infoAutos$Peso, infoAutos$ConsumoCombustible, 
+     main="Relación entre el peso y el consumo de combustible", 
+     xlab="Peso", 
+     ylab="Consumo de combustible", pch=19, col="red")
+abline(lm(infoAutos$ConsumoCombustible ~ infoAutos$Peso, data=infoAutos), col="blue")
