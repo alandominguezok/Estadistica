@@ -229,7 +229,7 @@ summary (numCuentasNuevas)
 sd(numCuentasNuevas) 
 
 # Coeficiente de variación
-cvar2 =  (sd(numCuentasNuevas)/mean(numCuentasNuevas))*100 
+cvar2 =  (sd(numCuentasNuevas)/mean(numCuentasNuevas))*100
 cvar2
 
 varianza = var(numCuentasNuevas)
@@ -297,3 +297,50 @@ distanciaInter = qu3 - qu1
 distanciaInter
 
 hist(numUsuariosConec)
+
+#-------------  
+#Ejercicio 5
+#-------------
+#Tiempo de espera entre pulsos nerviosos
+
+#Cargamos la libreria ACSWR, que incluye los datos de The Nerve Data
+library(ACSWR)
+
+#Cargamos los datos primero
+data(nerve)
+nerve = sort(nerve)
+nerve
+
+# Obtener un resumen de los datos
+summary(nerve)
+
+# calculamos la varianza
+var(nerve)
+# calculamos el desvio estandar
+sd(nerve)
+#calculamos el rango
+rango = max(nerve) - min(nerve)
+rango
+#calculamos la distancia intercuartílica y luego con su factor de correccion
+dinter3 = (quantile(nerve, .75)-quantile(nerve, .25))
+dinter3
+dinter3 = dinter3 / 1.349
+dinter3
+#Calculamos el coef de variacion
+cvar3 = (sd(nerve)/mean(nerve))*100
+cvar3
+
+limInf3 = quantile(nerve, .25) - ((3/2)*(quantile(nerve, .75) - quantile(nerve, .25)))
+limSup3 = quantile(nerve, .75) + ((3/2)*(quantile(nerve, .75) - quantile(nerve, .25)))
+limInf3;limSup3
+valores_atipicos3 <- nerve[nerve < limInf3 | nerve > limSup3]
+valores_atipicos3
+
+boxplot(nerve, xlab = "Tiempos de Espera", horizontal = TRUE)
+hist(nerve, xlab = "Tiempos de Espera", ylab = "Frecuencia", main = "Histograma de 799 tiempos
+de espera entre pulsos sucesivos a lo largo de una Fibra nerviosa") 
+
+#-------------  
+#Ejercicio 6
+#-------------
+
