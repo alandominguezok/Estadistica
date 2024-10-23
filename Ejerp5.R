@@ -214,9 +214,133 @@ abline(lm(Peso ~ Altura, data=Alumnos), col="red")
 
 
 
+#-------------  
 #Ejercicio 3
+#-------------
+numCuentasNuevas <- c(43, 37, 50, 51, 58, 105, 52, 45, 45, 10)
+
+#Ordenamos las frecuencias de cuentas nuevas
+numCuentasNuevas <- sort(numCuentasNuevas)
+
+#Resumen
+summary (numCuentasNuevas) 
+
+#desvio estandar
+sd(numCuentasNuevas) 
+
+# Coeficiente de variación
+cvar2 =  (sd(numCuentasNuevas)/mean(numCuentasNuevas))*100
+cvar2
+
+varianza = var(numCuentasNuevas)
+varianza
+# Mediana de los desvíos absolutos
+mad(numCuentasNuevas) 
+
+#Cuantil .75
+q3 = quantile (numCuentasNuevas, .75)
+#Cuantil .25
+q1 = quantile (numCuentasNuevas, .25)
+# Distancia intercuartílica con factor de corrección
+dinter2 <- (q3 - q1)/1.349 
+dinter2
+
+#Valores Atípicos podemos con el diagrama de caja encontrarlos
+boxplot(numCuentasNuevas)
+
+# por definicion
+limInf = q1 - (3/2)* (q3 - q1)
+limSup = q3 + (3/2)* (q3 - q1)
+limInf;limSup
+valores_atipicos <- numCuentasNuevas[numCuentasNuevas < limInf | numCuentasNuevas > limSup]
+valores_atipicos
 
 
+#-------------  
+#Ejercicio 4
+#-------------
+numUsuariosConec <- c(17.2, 22.1, 18.5, 17.2, 18.6, 14.8, 21.7, 15.8, 16.3, 22.8,
+                      24.1, 13.3, 16.2, 17.5, 19, 23.9, 14.8, 22.2, 21.7, 20.7,
+                      13.5, 15.8, 13.1, 16.1, 21.9, 23.9, 19.3, 12.0, 19.9, 19.4,
+                      15.4, 16.7, 19.5, 16.2, 16.9, 17.1, 20.2, 13.4, 19.8, 17.7,
+                      19.7, 18.7, 17.6, 15.9, 15.2, 17.1, 15.0, 18.8, 21.6, 11.9)
 
+#Ordenamos las frecuencias de Usuarios conectados
+numUsuariosConec <- sort(numUsuariosConec)
 
+#Calcular la media, la varianza y el desvıo estandar del numero de usuarios conectados 
+summary(numUsuariosConec)
+
+varianza2 = var(numUsuariosConec)
+varianza2
+
+sd (numUsuariosConec)
+
+rango = max(numUsuariosConec) - min(numUsuariosConec)
+rango
+
+boxplot(numUsuariosConec)
+
+# por definicion valores atipicos
+#Cuantil .75
+qu3 = quantile (numUsuariosConec, .75)
+#Cuantil .25
+qu1 = quantile (numUsuariosConec, .25)
+
+limInf2 = qu1 - ((3/2)*(qu3 - qu1))
+limSup2 = qu3 + ((3/2)*(qu3 - qu1))
+limInf;limSup
+valores_atipicos <- numUsuariosConec[numUsuariosConec < limInf2 | numUsuariosConec > limSup2]
+valores_atipicos
+
+distanciaInter = qu3 - qu1
+distanciaInter
+
+hist(numUsuariosConec)
+
+#-------------  
+#Ejercicio 5
+#-------------
+#Tiempo de espera entre pulsos nerviosos
+
+#Cargamos la libreria ACSWR, que incluye los datos de The Nerve Data
+library(ACSWR)
+
+#Cargamos los datos primero
+data(nerve)
+nerve = sort(nerve)
+nerve
+
+# Obtener un resumen de los datos
+summary(nerve)
+
+# calculamos la varianza
+var(nerve)
+# calculamos el desvio estandar
+sd(nerve)
+#calculamos el rango
+rango = max(nerve) - min(nerve)
+rango
+#calculamos la distancia intercuartílica y luego con su factor de correccion
+dinter3 = (quantile(nerve, .75)-quantile(nerve, .25))
+dinter3
+dinter3 = dinter3 / 1.349
+dinter3
+#Calculamos el coef de variacion
+cvar3 = (sd(nerve)/mean(nerve))*100
+cvar3
+
+limInf3 = quantile(nerve, .25) - ((3/2)*(quantile(nerve, .75) - quantile(nerve, .25)))
+limSup3 = quantile(nerve, .75) + ((3/2)*(quantile(nerve, .75) - quantile(nerve, .25)))
+limInf3;limSup3
+valores_atipicos3 <- nerve[nerve < limInf3 | nerve > limSup3]
+valores_atipicos3
+
+boxplot(nerve, xlab = "Tiempos de Espera", horizontal = TRUE)
+hist(nerve, xlab = "Tiempos de Espera", ylab = "Frecuencia", main = "Histograma de 799 tiempos
+de espera entre pulsos sucesivos a lo largo de una Fibra nerviosa") 
+
+#-------------  
+#Ejercicio 6
+#-------------
 
