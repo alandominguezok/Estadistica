@@ -31,3 +31,24 @@ hist(cuantiles_75, ylab="Frecuencia")
 errorEstandar <- sd(cuantiles_75);
 errorEstandar
 cat("El error estandar es de ", errorEstandar, " min y, dado que la media es de ", mean(cuantiles_75), "min, representa un 14,7% por lo tanto el error sigue siendo una fracción significativa de tita sombrero")
+
+#Ejercicio 7 a)
+qnorm(0.96)
+
+extremoIzq = 16.2 -  1.750686 * (3.6/(sqrt(120)))
+extremoIzq
+
+extremoDer = 16.2 +  1.750686 * (3.6/(sqrt(120)))
+extremoDer
+
+#Ejercicio 6)
+z_0 = qnorm(0.975)
+z_0
+
+#Ejercicio 5)
+z_005 = qnorm(0.95)
+z_005
+
+#Ejercicio 4) 
+z_0025 = qnorm(0.975)
+z_0025
